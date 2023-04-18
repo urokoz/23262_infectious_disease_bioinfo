@@ -32,11 +32,12 @@ module load tbl2asn/20170106 jre/1.8.0-openjdk minced/0.2.0
 module load perl
 module load prokka/1.12
 
-DATADIR=/home/projects/course_23262/course/week08/pangenome/data
+DATADIR=/home/projects/course_23262/groups/group_8/raw_data
 WORKDIR=/home/projects/course_23262/people/matbor/prokka
 
 # Make sure you annotate the six genomes by replacing the -outdir and -locustag and fasta file accordingly. It should take ~ 4 minutes per genome in a standard laptop computer.
-#run Prokka
+# run Prokka
+
 prokka --kingdom Bacteria --outdir ${WORKDIR}/prokka_GCA_000008285 --genus Listeria --locustag GCA_000008285 ${DATADIR}/GCA_000008285.fna
 prokka --kingdom Bacteria --outdir ${WORKDIR}/prokka_GCA_000021185 --genus Listeria --locustag GCA_000021185 ${DATADIR}/GCA_000021185.fna
 prokka --kingdom Bacteria --outdir ${WORKDIR}/prokka_GCA_000026705 --genus Listeria --locustag GCA_000026705 ${DATADIR}/GCA_000026705.fna
