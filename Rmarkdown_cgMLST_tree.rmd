@@ -1,0 +1,40 @@
+---
+title: 'cgMLST tree'
+author: "Shinny Pimlapas Leekitcharoenphon"
+date: "September 21, 2018"
+output: 
+  html_document:
+    theme: sandstone
+    code_folding: hide
+---
+
+
+```{r init, message=FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, warning=FALSE, message=FALSE)
+# install.packages("cluster")
+library(cluster)
+# install.packages("ape")
+library(ape)
+# install.packages("reshape")
+library(reshape)
+```
+## cgMLST tree (distance not included) {#E2A}
+```{r cgMLST tree, eval=TRUE}
+data <- read.table("/home/mathias/23262_infect_bioinf/ecoli_results.txt", sep = "\t", row.names=1, colClasses = "factor", header = T)
+cgMLST_tree <- as.phylo(hclust(daisy(data, metric="gower")))
+write.tree(phy=cgMLST_tree, file="/home/mathias/23262_infect_bioinf/cgMLST_tree.newick")
+plot(hclust(daisy(data, metric="gower")))
+
+```
+
+
+## cgMLST dissimilarity table {#E2A}
+```{r dissimilarity tree, eval=TRUE}
+
+m <- as.matrix(daisy(data, metric="gower"))
+m2 <- melt(m)[melt(upper.tri(m))$value,]
+names(m2) <- c("c1", "c2", "distance")
+m
+m2
+write.table(m, '/home/mathias/23262_infect_bioinf/table_dissimilarity_cgMLST.txt', sep='\t')
+```
